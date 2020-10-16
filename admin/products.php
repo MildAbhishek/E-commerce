@@ -20,17 +20,13 @@ include ('config.php');
     <noscript> <!-- Show a notification if the user has disabled javascript -->
         <div class="notification error png_bg">
             <div>
-		        Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+			Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
             </div>
         </div>
     </noscript>
-			
-			<!-- Page Head -->
-			<h2>Welcome John</h2>
-			<p id="page-intro">What would you like to do?</p>
-			
-			
-			
+    <!-- Page Head -->
+    <h2>Welcome John</h2>
+        <p id="page-intro">What would you like to do?</p>	
 			<div class="clear"></div> <!-- End .clear -->
 			
 			<div class="content-box"><!-- Start Content Box -->
@@ -170,7 +166,7 @@ include ('config.php');
 				}
 				showProduct();
 
-
+				//Addition of Products 
 				$("#submit").on('click', function(e){
 					//alert("Hii..");
 					e.preventDefault();
@@ -210,6 +206,29 @@ include ('config.php');
 						}
 					})
 				});
+
+				//Deletion of Products
+				$(document).on("click", ".del-btn", function(){
+					//alert("Hii");
+					var pproductId= $(this).data("pid");
+					var item=this;
+					console.log(pproductId);
+					//alert(item);
+					//alert(productId);
+					$.ajax({
+						url : "deleteProduct.php",
+						type : "POST",
+						data : {pid : pproductId},
+						success : function(data){
+                                     if(data==1){
+										 $(item).closest("tr").fadeOut();
+									 } else {
+										 alert("WE CON'T DELETE THIS RECORD ");
+									 }
+								 }
+					});
+				});
+
 			});
 			</script>
 			

@@ -13,20 +13,16 @@
 //echo "Hii..";
 require 'config.php';
 
-$sql= "SELECT * FROM products";
+$sql= "SELECT * FROM categories";
 $result=$conn->query($sql);
 $html="";
 if ($result->num_rows>0) {
-$html='<table id="producttable
+$html='<table id="categorytable">
 <thead>
     <tr>
         <th><input class="check-all" type="checkbox" /></th>
         <th>Id</th>
         <th>Name</th>
-        <th>Picture</th>
-        <th>Price</th>
-        <th>Short Description</th>
-        <th>Long Description</th>
         <th>Action</th>
     </tr>
 </thead>
@@ -57,27 +53,22 @@ $html='<table id="producttable
 </tfoot>
 <tbody>';
     while ($row = $result->fetch_assoc()) {
-        $html .="
+        $html .='
             <tr>
-            <td><input type='checkbox' /></td>
-            <td>{$row["productId"]}</td>
-            <td>{$row["productId"]}</td>
-           <td>   <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
-           </td>
-            <td>{$row["productId"]}</td>
-            <td>{$row["productId"]}</td>
-            
+            <td><input type="checkbox" /></td>
+            <td>'.$row["categoryId"].'</td>
+            <td>'.$row["categoryName"].'</td>
             <td>
                 <!-- Icons -->
-                <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
-                <a href='#' title='Delete'><img class='del-btn'  data-pid='{$row["productId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
-                 <a href='#' title='Edit Meta'><img src='resources/images/icons/hammer_screwdriver.png' alt='Edit Meta' /></a>
+                <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+                <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+                <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
             </td>
-        </tr>";
+        </tr>';
     }
     $html.='<tbody></table>';
 }
-mysqli_close($conn);
+$conn->close();
 echo $html;
 ?>
 

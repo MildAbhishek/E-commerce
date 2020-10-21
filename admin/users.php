@@ -54,7 +54,7 @@ include ('config.php');
 								This is a Content Box. You can put whatever you want in it. By the way, you can close this notification with the top-right cross.
 							</div>
 						</div>
-						<div id="producttable">
+						<div id="usertable">
 						<table>
 								<tr>
 									<td><input type="checkbox" /></td>
@@ -84,92 +84,25 @@ include ('config.php');
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
 								
 							    <p>
-									<label>Enter Product Id</label>
-										<input class="text-input small-input" type="text" id="productId" name="productId" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									<label>Enter User Name</label>
+										<input class="text-input small-input" type="text" id="userName" name="userName" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>A small description of the userId</small>
                                 </p>
 
 								<p>
-									<label>Enter Product Name</label>
-										<input class="text-input small-input" type="text" id="productName" name="productName" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									<label>Enter User Email</label>
+										<input class="text-input small-input" type="text" id="userEmail" name="userEmail" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>A small description of the userName</small>
                                 </p>
-                                
+
                                 <p>
-									<label>Enter Product Price</label>
-										<input class="text-input small-input" type="text" id="productPrice" name="productPrice" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
+									<label>Enter Password</label>
+										<input class="text-input small-input" type="text" id="userPassword" name="userPassword" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<br /><small>A small description of the userPassword</small>
                                 </p>
-                                
-                                <p>
-									<label>Image</label>
-										<input class="text-input small-input" type="file" id="productImage" name="productImage" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
-										<br /><small>A small description of the field</small>
-								</p>
+
+
 								
-								<p>
-
-									<label>Category </label>
-									<?php
-									include 'config.php';
-									$sql= "SELECT * FROM categories";
-									$result = mysqli_query($conn, $sql) or die("Query Not Accepted");
-									
-									if (mysqli_num_rows($result) > 0) {
-										?>
-										<select name="dropdown" id="productCategory" class="medium-input">
-											<?php
-												while ($row = mysqli_fetch_assoc($result)) {
-											?>
-			
-											<option value="<?php echo $row['categoryName']; ?>">
-										
-											<?php echo $row["categoryName"]; ?></option>
-
-									<?php
-									}
-									?>
-								</select>
-								<?php
-								} else {
-									echo "Not found"; 
-								}
-								?>
-								</p>
-                                
-                                <p>
-									<label>Tags</label>
-									<?php
-									include 'config.php';
-									$sql="SELECT * FROM tags";
-									$result= mysqli_query($conn, $sql) or die("Query Not Accepted");
-									if (mysqli_num_rows($result) > 0) {
-										?>
-										<?php
-											while ($row = mysqli_fetch_assoc($result)) {
-										?>
-											<input type="checkbox" name="checkbox" id="productTag" value="<?php echo $row['tagName']; ?>"/> <?php echo $row['tagName'];?>
-										<?php
-											}
-										?>
-									<?php
-									} else {
-										echo "Not found"; 
-										}
-									?>
-									 
-								</p>
-								
-
-								<p>
-									<label>Enter Short Description</label>
-									<textarea class="text-input textarea wysiwyg" id="shortDescription" name="short-description" cols="79" rows="15"></textarea>
-								</p>
-
-								<p>
-									<label>Enter Long Description</label>
-									<textarea class="text-input textarea wysiwyg" id="longDescription" name="long-description" cols="79" rows="15"></textarea>
-								</p>
 								
 								<p>
 									<input class="button" type="submit" id="submit" value="Submit" />
@@ -190,50 +123,40 @@ include ('config.php');
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 			<script>
 			$(document).ready(function(){
-				function showProduct(){
+				function showUser(){
 					$.ajax({
-						url: "showProduct.php",
+						url: "showUser.php",
 						type: "POST",
 						success: function(data){
-							$("#producttable").html(data);
+							$("#usertable").html(data);
 						}
 					});
 				}
-				showProduct();
+				showUser();
 
-				//Addition of Products 
+
 				$("#submit").on('click', function(e){
 					//alert("Hii..");
 					e.preventDefault();
-					var productId= $("#productId").val();
-					var productName=$("#productName").val();
-					var productPrice=$("#productPrice").val();
-					var productImage=$("#productImage").val();
-					var productCategory=$("#productCategory").val();
-					var productTag=$("#productTag").val();
-					var shortDescription=$("#shortDescription").val();
-					var longDescription=$("#longDescription").val();
+					var userName=$("#userName").val();
+                    var userEmail= $("#userEmail").val();
+                    var userPassword= $("#userPassword").val();
+					//document.write(userName);
 
-					//document.write(productId);
 					$.ajax({
-						url:"addProduct.php",
+						url:"addUser.php",
 						type:"POST",
 						data:{
-							productId : productId,
-							productName : productName,
-							productPrice : productPrice,
-							//productImage : productImage,
-							productCategory : productCategory,
-							productTag : productTag,
-							shortDescription : shortDescription,
-							longDescription : longDescription
+							userName :userName,
+                            userEmail :userEmail,
+                            userPassword :userPassword
 						},
 						success : function(data){
 							//document.write(data);
 							//alert(data);
-							if(data=="1") {
-								alert("Success");
-								showProduct();
+							if(data==1) {
+								alert("Successfully inserted");
+								showUser();
 							} else {
 								alert("Error");
 							}
@@ -241,29 +164,24 @@ include ('config.php');
 						}
 					})
 				});
-
-				//Deletion of Products
-				$(document).on("click", ".del-product", function(){
-					//alert("Hii");
-					var pproductId= $(this).data("pid");
+				$(document).on("click", ".del-category", function(){
+					//alert("Hii..");
+					var userId=$(this).data("pid");
 					var item=this;
-					//console.log(pproductId);
-					//alert(item);
-					//alert(productId);
+					//alert(userId);
 					$.ajax({
-						url : "deleteProduct.php",
+						url : "deleteUser.php",
 						type : "POST",
-						data : {pid : pproductId},
-						success : function(data){
-                                     if(data==1){
-										$(item).closest("tr").fadeOut();
-									 } else {
-										alert("Can't Delete");
-									 }
-								 }
+						data : { id : userId},
+						success: function(data){
+							if (data==1) {
+								$(item).closest("tr").fadeOut();
+							}else {
+								alert("Can't Delete");
+							}
+						} 
 					});
-				});
-
+				})
 			});
 			</script>
 			

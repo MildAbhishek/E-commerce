@@ -17,10 +17,10 @@ $sql= "SELECT * FROM products";
 $result=$conn->query($sql);
 $html="";
 if ($result->num_rows>0) {
-$html='<table id="producttable
+$html='<table id="producttable">
 <thead>
     <tr>
-        <th><input class="check-all" type="checkbox" /></th>
+        <th>Select</th>
         <th>Id</th>
         <th>Name</th>
         <th>Picture</th>
@@ -61,16 +61,16 @@ $html='<table id="producttable
             <tr>
             <td><input type='checkbox' /></td>
             <td>{$row["productId"]}</td>
-            <td>{$row["productId"]}</td>
-           <td>   <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
-           </td>
-            <td>{$row["productId"]}</td>
-            <td>{$row["productId"]}</td>
+            <td>{$row["productName"]}</td>
+            <td><a href='#' title='Edit'><img src='../images/{$row["productImage"]}' style='height:20px; width:100px;' alt='Edit' /></a></td>
+            <td>{$row["productPrice"]}</td>
+            <td>{$row["shortDescription"]}</td>
+            <td>{$row["longDescription"]}</td>
             
             <td>
                 <!-- Icons -->
                 <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
-                <a href='#' title='Delete'><img class='del-btn'  data-pid='{$row["productId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
+                <a href='#' title='Delete'><img class='del-product'  data-pid='{$row["productId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
                  <a href='#' title='Edit Meta'><img src='resources/images/icons/hammer_screwdriver.png' alt='Edit Meta' /></a>
             </td>
         </tr>";

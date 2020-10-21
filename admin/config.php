@@ -12,7 +12,7 @@
  */
 $siteurl="";
 $servername = "localhost:3307";
-$dbname="ecommerce";
+$dbname="cedcoss";
 $username = "root";
 $password = "";
 

@@ -17,7 +17,8 @@
 		$filename = basename($_SERVER['REQUEST_URI']);
 		//echo $filename;
 		//die();
-		$productmenu = array('addProducts.php','manageProducts.php','categories.php','tags.php');
+		$productmenu = array('products.php','categories.php','tags.php');
+		$usermenu = array('users.php');
 	?>	
     
 		  
@@ -49,12 +50,11 @@
 				</li>
 				
 				<li>
-					<a href="#" class="nav-top-item">
+					<a href="#" class="nav-top-item   <?php if(in_array($filename,$usermenu)): ?>current<?php endif; ?>">
 					Users
 					</a>
 					<ul>
-						<li><a href="addUsers.php">Add Users</a></li>
-						<li><a href="manageUsers.php">Manage Users</a></li>
+						<li><a  <?php if($filename=='users.php'): ?>class="current"<?php endif; ?>  href="users.php">Manage Users</a></li>
 					</ul>
                 </li>
                 

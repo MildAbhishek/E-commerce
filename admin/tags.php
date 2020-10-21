@@ -156,6 +156,25 @@ include ('config.php');
 						}
 					})
 				});
+
+				$(document).on("click", ".del-tag", function(){
+					//alert("Hii..");
+					var tagId=$(this).data("pid");
+					var item=this;
+					//alert(categoryId);
+					$.ajax({
+						url : "deleteTag.php",
+						type : "POST",
+						data : { id : tagId},
+						success: function(data){
+							if (data==1) {
+								$(item).closest("tr").fadeOut();
+							}else {
+								alert("Can't Delete");
+							}
+						} 
+					});
+				})
 			});
 			</script>
 			

@@ -20,7 +20,7 @@ if ($result->num_rows>0) {
 $html='<table id="categorytable">
 <thead>
     <tr>
-        <th><input class="check-all" type="checkbox" /></th>
+        <th>Select Box</th>
         <th>Id</th>
         <th>Name</th>
         <th>Action</th>
@@ -52,20 +52,21 @@ $html='<table id="categorytable">
     </tr>
 </tfoot>
 <tbody>';
-    while ($row = $result->fetch_assoc()) {
-        $html .='
-            <tr>
-            <td><input type="checkbox" /></td>
-            <td>'.$row["categoryId"].'</td>
-            <td>'.$row["categoryName"].'</td>
-            <td>
-                <!-- Icons -->
-                <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-                <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-                <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-            </td>
-        </tr>';
-    }
+while ($row = $result->fetch_assoc()) {
+    $html .="
+        <tr>
+        <td><input type='checkbox' /></td>
+        <td>{$row["categoryId"]}</td>
+        <td>{$row["categoryName"]}</td>
+        
+        <td>
+            <!-- Icons -->
+            <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
+            <a href='#' title='Delete'><img class='del-category'  data-pid='{$row["categoryId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
+             <a href='#' title='Edit Meta'><img src='resources/images/icons/hammer_screwdriver.png' alt='Edit Meta' /></a>
+        </td>
+    </tr>";
+}
     $html.='<tbody></table>';
 }
 $conn->close();

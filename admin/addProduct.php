@@ -17,14 +17,14 @@ $productId = $_POST['productId'];
 $productName = $_POST['productName'];
 $productPrice = $_POST['productPrice'];
 //$productImage = $_POST['productImage'];
-//$productCategory = $_POST['productCategory'];
-//$productTag = $_POST['ProductTag'];
+$productCategory = $_POST['productCategory'];
+$productTag = $_POST['productTag'];
 $shortDescription = $_POST['shortDescription'];
 $longDescription = $_POST['longDescription'];
-//echo $productId;
+//echo $productTag;
 
-$sql = "INSERT INTO products (`productId`, `productName`, `productPrice`, `shortDescription`, `longDescription`)
-VALUES ('".$productId."', '".$productName."', '".$productPrice."', '".$shortDescription."', '".$longDescription."')";
+$sql = "INSERT INTO products (`productId`, `productName`, `productPrice`, `productCategory`, `productTag`, `shortDescription`, `longDescription`)
+VALUES ('".$productId."', '".$productName."', '".$productPrice."', '".$productCategory."', '".$productTag."', '".$shortDescription."', '".$longDescription."')";
 //echo $sql;
 if ($conn->query($sql)===true) {
   echo "1";

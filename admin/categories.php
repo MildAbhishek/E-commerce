@@ -156,6 +156,24 @@ include ('config.php');
 						}
 					})
 				});
+				$(document).on("click", ".del-category", function(){
+					//alert("Hii..");
+					var categoryId=$(this).data("pid");
+					var item=this;
+					//alert(categoryId);
+					$.ajax({
+						url : "deleteCategory.php",
+						type : "POST",
+						data : { id : categoryId},
+						success: function(data){
+							if (data==1) {
+								$(item).closest("tr").fadeOut();
+							}else {
+								alert("Can't Delete");
+							}
+						} 
+					});
+				})
 			});
 			</script>
 			

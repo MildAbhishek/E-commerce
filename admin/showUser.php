@@ -13,16 +13,18 @@
 //echo "Hii..";
 require 'config.php';
 
-$sql= "SELECT * FROM tags";
+$sql= "SELECT * FROM users";
 $result=$conn->query($sql);
 $html="";
 if ($result->num_rows>0) {
-$html='<table id="tagtable">
+$html='<table id="usertable">
 <thead>
     <tr>
-        <th><input class="check-all" type="checkbox" /></th>
-        <th>Tag Id</th>
-        <th>Tag Name</th>
+        <th>Select Box</th>
+        <th>userId</th>
+        <th>userName</th>
+        <th>userEmail</th>
+        <th>userPassword</th>
         <th>Action</th>
     </tr>
 </thead>
@@ -56,13 +58,16 @@ while ($row = $result->fetch_assoc()) {
     $html .="
         <tr>
         <td><input type='checkbox' /></td>
-        <td>{$row["tagId"]}</td>
-        <td>{$row["tagName"]}</td>
+        <td>{$row["userId"]}</td>
+        <td>{$row["userName"]}</td>
+        <td>{$row["userEmail"]}</td>
+        <td>{$row["userPassword"]}</td>
+        
         
         <td>
             <!-- Icons -->
             <a href='#' title='Edit'><img src='resources/images/icons/pencil.png' alt='Edit' /></a>
-            <a href='#' title='Delete'><img class='del-tag'  data-pid='{$row["tagId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
+            <a href='#' title='Delete'><img class='del-category'  data-pid='{$row["userId"]}' src='resources/images/icons/cross.png' alt='Delete' /></a> 
              <a href='#' title='Edit Meta'><img src='resources/images/icons/hammer_screwdriver.png' alt='Edit Meta' /></a>
         </td>
     </tr>";
